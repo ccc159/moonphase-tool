@@ -10,7 +10,7 @@ The moonphase tool shows current moonphase so that you can easily set your watch
 
 ## Usage
 
-Go to https://chen.works/web-art/moonphase
+Go to https://chen.works/web-art/moonphase/
 
 ## Acknowledgements
 
