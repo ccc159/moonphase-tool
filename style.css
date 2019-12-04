@@ -6,6 +6,8 @@ body {
   margin: 0;
   padding: 0;
   background: #464646;
+  font-family: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, Helvetica, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans',
+    'Droid Sans', 'Microsoft Yahei', sans-serif;
 }
 
 #renderCanvas {
@@ -20,9 +22,7 @@ body {
   margin: auto;
   bottom: 0;
   margin-bottom: 20px;
-  font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, Helvetica,
-    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
-    "Microsoft Yahei", sans-serif;
+
   /* color: #313131; */
   color: #e7e8e7;
   background: none;
@@ -53,8 +53,16 @@ body {
   height: 300px;
 }
 
+.description {
+  color: #e7e8e7;
+  position: absolute;
+  top: 320px;
+  font-size: 13px;
+}
+
 .moon {
   transition: all 4s ease-in-out;
+  transform-origin: center;
 }
 
 .cover {
