@@ -1,31 +1,18 @@
 var MoonInfo = function(day, month, year) {
-  var n0 = parseInt("0");
-  var f0 = parseFloat("0.0");
+  var n0 = parseInt('0');
+  var f0 = parseFloat('0.0');
   var AG = f0; // Moon's age
   var DI = f0; // Moon's distance in earth radii
   var LA = f0; // Moon's ecliptic latitude
   var LO = f0; // Moon's ecliptic longitude
-  var Phase = " ";
-  var Zodiac = " ";
+  var Phase = ' ';
+  var Zodiac = ' ';
 
   // Related to month length and age calculations
-  var n28 = parseInt("28");
-  var n30 = parseInt("30");
-  var n31 = parseInt("31");
-  var dim = new Array(
-    n31,
-    n28,
-    n31,
-    n30,
-    n31,
-    n30,
-    n31,
-    n31,
-    n30,
-    n31,
-    n30,
-    n31
-  );
+  var n28 = parseInt('28');
+  var n30 = parseInt('30');
+  var n31 = parseInt('31');
+  var dim = new Array(n31, n28, n31, n30, n31, n30, n31, n31, n30, n31, n30, n31);
 
   day = parseInt(day, 10);
   month = parseInt(month, 10);
@@ -101,25 +88,21 @@ var MoonInfo = function(day, month, year) {
     IP = normalize((JD - 2451550.1) / 29.530588853);
     AG = IP * 29.53;
 
-    if (AG < 1.84566) Phase = "A new moon";
-    else if (AG < 5.53699) Phase = "An evening crescent";
-    else if (AG < 9.22831) Phase = "A first quarter";
-    else if (AG < 12.91963) Phase = "A waxing gibbous";
-    else if (AG < 16.61096) Phase = "A full moon";
-    else if (AG < 20.30228) Phase = "A waning gibbous";
-    else if (AG < 23.99361) Phase = "A Last quarter";
-    else if (AG < 27.68493) Phase = "A Morning crescent";
-    else Phase = "A new moon";
+    if (AG < 1.84566) Phase = 'A new moon';
+    else if (AG < 5.53699) Phase = 'An evening crescent';
+    else if (AG < 9.22831) Phase = 'A first quarter';
+    else if (AG < 12.91963) Phase = 'A waxing gibbous';
+    else if (AG < 16.61096) Phase = 'A full moon';
+    else if (AG < 20.30228) Phase = 'A waning gibbous';
+    else if (AG < 23.99361) Phase = 'A Last quarter';
+    else if (AG < 27.68493) Phase = 'A Morning crescent';
+    else Phase = 'A new moon';
 
     IP = IP * 2 * Math.PI; // Convert phase to radians
 
     // calculate moon's distance
     DP = 2 * Math.PI * normalize((JD - 2451562.2) / 27.55454988);
-    DI =
-      60.4 -
-      3.3 * Math.cos(DP) -
-      0.6 * Math.cos(2 * IP - DP) -
-      0.5 * Math.cos(2 * IP);
+    DI = 60.4 - 3.3 * Math.cos(DP) - 0.6 * Math.cos(2 * IP - DP) - 0.5 * Math.cos(2 * IP);
 
     // calculate moon's ecliptic latitude
     NP = 2 * Math.PI * normalize((JD - 2451565.2) / 27.212220817);
@@ -127,11 +110,7 @@ var MoonInfo = function(day, month, year) {
 
     // calculate moon's ecliptic longitude
     RP = normalize((JD - 2451555.8) / 27.321582241);
-    LO =
-      360 * RP +
-      6.3 * Math.sin(DP) +
-      1.3 * Math.sin(2 * IP - DP) +
-      0.7 * Math.sin(2 * IP);
+    LO = 360 * RP + 6.3 * Math.sin(DP) + 1.3 * Math.sin(2 * IP - DP) + 0.7 * Math.sin(2 * IP);
 
     // correcting if longitude is not greater than 360!
     if (LO > 360) LO = LO - 360;
@@ -151,31 +130,32 @@ var MoonInfo = function(day, month, year) {
   }
 
   if (!isdayofmonth(year, month, day)) {
-    alert("Invalid date");
+    alert('Invalid date');
     return;
   }
 
   return { age, phase };
 };
 
-window.addEventListener("load", async () => {
+window.addEventListener('load', async () => {
   // cover
-  var cover = document.getElementsByClassName("cover")[0];
+  var cover = document.getElementsByClassName('cover')[0];
   cover.style.opacity = 0.97;
 
-  cover.addEventListener("mouseover", () => {
+  cover.addEventListener('mouseover', () => {
     cover.style.opacity = 0.85;
   });
 
-  cover.addEventListener("mouseleave", () => {
+  cover.addEventListener('mouseleave', () => {
     cover.style.opacity = 0.97;
   });
 
   // calculate moonphase
   var now = new Date();
-  var day = now.getDay();
-  var month = now.getMonth();
+  var day = now.getDate();
+  var month = now.getMonth() + 1;
   var year = now.getFullYear();
+
   var { age, phase } = MoonInfo(day, month, year);
 
   // calculate angle
@@ -183,10 +163,10 @@ window.addEventListener("load", async () => {
   if (angle < 10) angle += 180;
 
   // moon
-  var moon = document.getElementsByClassName("moon")[0];
+  var moon = document.getElementsByClassName('moon')[0];
   moon.style.transform = `rotate(${angle}deg)`;
 
   //description
-  var description = document.getElementsByClassName("description")[0];
+  var description = document.getElementsByClassName('description')[0];
   description.innerHTML = `Today is <strong>${now.toLocaleDateString()}</strong>. Moonphase: <strong>${phase}</strong>.`;
 });
